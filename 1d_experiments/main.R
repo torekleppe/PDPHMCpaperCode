@@ -62,11 +62,4 @@ results[21,] <- lams
 write.table(results,file="results.txt")
 
 
-# 
-# par(mfrow=c(1,1))
-# plot(lams,results[1,])
-# points(lams,results[2,])
-# points(lams,results[3,])
-# lines(lams,results[4,1]+0*lams)
-
 
