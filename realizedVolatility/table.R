@@ -1,4 +1,6 @@
 
+rm(list=ls())
+
 ess.table <- matrix(NaN,22,10)
 
 # stan part
@@ -14,8 +16,8 @@ cc <- 1
 nms <- rownames(m)
 id <- grep("mu[",nms,fixed=TRUE)
 
-ess.table[1,cc] <- t.s
-ess.table[1,cc+1] <- t.t
+ess.table[1,cc] <- round(t.s)
+ess.table[1,cc+1] <- round(t.t)
 ess.table[2,cc] <- min(m[id,"n_eff"])
 ess.table[2,cc+1] <- max(m[id,"n_eff"])
 ess.table[3,cc] <- ess.table[2,cc]/t.s
@@ -72,9 +74,9 @@ ess.table[22,cc] <- ess.table[20,cc]/t.t
 ess.table[22,cc+1] <- ess.table[20,cc+1]/t.t
 
 
-load("Computations_vari")
+load("Computations_b1")
 # discrete samples
-fit <- fit.p.c
+fit <- fit.p.cl
 m <- pdphmc::getMonitor(fit)[[1]]
 t.s <- sum(pdphmc::get_CPU_time(fit)[,"sampling"])
 t.t <- sum(pdphmc::get_CPU_time(fit))
@@ -82,8 +84,8 @@ cc <- 3
 nms <- rownames(m)
 id <- grep("mu_g(",nms,fixed=TRUE)
 
-ess.table[1,cc] <- t.s
-ess.table[1,cc+1] <- t.t
+ess.table[1,cc] <- round(t.s)
+ess.table[1,cc+1] <- round(t.t)
 ess.table[2,cc] <- min(m[id,"n_eff"])
 ess.table[2,cc+1] <- max(m[id,"n_eff"])
 ess.table[3,cc] <- ess.table[2,cc]/t.s
@@ -149,8 +151,8 @@ m[,"n_eff"]<-round(m[,"n_eff"]*fac)
 nms <- rownames(m)
 id <- grep("mu_g(",nms,fixed=TRUE)
 
-ess.table[1,cc] <- t.s
-ess.table[1,cc+1] <- t.t
+ess.table[1,cc] <- round(t.s)
+ess.table[1,cc+1] <- round(t.t)
 ess.table[2,cc] <- min(m[id,"n_eff"])
 ess.table[2,cc+1] <- max(m[id,"n_eff"])
 ess.table[3,cc] <- ess.table[2,cc]/t.s
@@ -208,9 +210,9 @@ ess.table[22,cc+1] <- ess.table[20,cc+1]/t.t
 
 
 
+load("Computations_b2")
 
-
-fit <- fit.p.cl
+fit <- fit.p.al
 m <- pdphmc::getMonitor(fit)[[1]]
 t.s <- sum(pdphmc::get_CPU_time(fit)[,"sampling"])
 t.t <- sum(pdphmc::get_CPU_time(fit))
@@ -218,8 +220,8 @@ cc <- cc+2
 nms <- rownames(m)
 id <- grep("mu_g(",nms,fixed=TRUE)
 
-ess.table[1,cc] <- t.s
-ess.table[1,cc+1] <- t.t
+ess.table[1,cc] <- round(t.s)
+ess.table[1,cc+1] <- round(t.t)
 ess.table[2,cc] <- min(m[id,"n_eff"])
 ess.table[2,cc+1] <- max(m[id,"n_eff"])
 ess.table[3,cc] <- ess.table[2,cc]/t.s
@@ -285,8 +287,8 @@ m[,"n_eff"]<-round(m[,"n_eff"]*fac)
 nms <- rownames(m)
 id <- grep("mu_g(",nms,fixed=TRUE)
 
-ess.table[1,cc] <- t.s
-ess.table[1,cc+1] <- t.t
+ess.table[1,cc] <- round(t.s)
+ess.table[1,cc+1] <- round(t.t)
 ess.table[2,cc] <- min(m[id,"n_eff"])
 ess.table[2,cc+1] <- max(m[id,"n_eff"])
 ess.table[3,cc] <- ess.table[2,cc]/t.s
@@ -344,5 +346,30 @@ ess.table[22,cc+1] <- ess.table[20,cc+1]/t.t
 
 
 
+rownames(ess.table) <- c("cputime",
+                         rep("mu",3),
+                         rep("sigma",3),
+                         rep("delta",3),
+                         rep("h",3),
+                         rep("nu",3),
+                         rep("firstz",3),
+                         rep("firstx",3))
 
+#print(xtable::xtable(ess.table),file="table.tex")
+
+tab.str <- "\\begin{table} \n \\begin{tabular}{ccccc}\n"
+for(i in 1:dim(ess.table)[1]){
+  for(j in 1:5){
+    tab.str <- paste0(tab.str, "(",round(ess.table[i,2*j-1],2),",",round(ess.table[i,2*j],2),")")
+    if(j==5 ){
+      if(i<dim(ess.table)[1]) tab.str <- paste0(tab.str,"\\\\")
+      tab.str <- paste0(tab.str,"\n ")
+      
+    } else {
+      tab.str <- paste0(tab.str," & ")
+    }
+  }
+}
+tab.str <- paste0(tab.str,"\\end{tabular} \n \\end{table} \n")
+cat(tab.str,file="table.tex")
 print(round(ess.table,2))

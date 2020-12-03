@@ -1,5 +1,5 @@
 
-
+rm(list=ls())
 
 load("Computations_stan")
 
@@ -20,8 +20,8 @@ nmp <- c(nmp,"nu_g")
 tab <- cbind(round(m[nms,"mean"],2),
              round(m[nms,"sd"],3))
 
-load("Computations_vari")
-fit <- fit.p.c
+load("Computations_b1")
+fit <- fit.p.cl
 mp <- as.matrix(pdphmc::getMonitor(fit)[[1]])
 mpi <- as.matrix(pdphmc::getIntMonitor(fit)[[1]])
 
@@ -31,7 +31,9 @@ tab <- cbind(tab,
              round(mp[nmp,"sd"],3)
              )
 
-fit <- fit.p.cl
+
+load("Computations_b2")
+fit <- fit.p.al
 mp <- as.matrix(pdphmc::getMonitor(fit)[[1]])
 mpi <- as.matrix(pdphmc::getIntMonitor(fit)[[1]])
 
@@ -40,5 +42,8 @@ tab <- cbind(tab,
              round(mpi[nmp,"mean"],2),
              round(mp[nmp,"sd"],3)
 )
+
+
+print(xtable::xtable(tab),file="par_table.tex")
 
 print(tab)
