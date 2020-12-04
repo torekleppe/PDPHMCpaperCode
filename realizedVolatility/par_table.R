@@ -44,6 +44,6 @@ tab <- cbind(tab,
 )
 
 
-print(xtable::xtable(tab),file="par_table.tex")
+print(xtable::xtable(tab,digits=c(1,2,3,2,2,3,2,2,3)),file="par_table.tex")
 
 print(tab)

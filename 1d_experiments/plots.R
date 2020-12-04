@@ -17,9 +17,9 @@ for(m in 1:4){
   ylab <- ""
 }
 
-legend(x="topleft",
+legend(x="topright",
        legend=c("iid RMSE","Integrated","Point samples","Randomized HMC"),
-       cex=2,
+       cex=1.7,
        lwd=c(2,NaN,NaN,NaN),
        pch=c(NaN,1,4,17),
        col=c("black","black","red","green"))
