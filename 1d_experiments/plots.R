@@ -12,17 +12,17 @@ for(m in 1:4){
        ylab=ylab,cex.lab=1.5,cex.axis=1.8,cex.main=2,ylim=c(0,0.14))
   points(beta,r[(m-1)*5+1,],pch=1,cex=2)
   points(beta,r[(m-1)*5+2,],pch=4,cex=2,col="red")
-  #points(beta,r[(m-1)*5+3,],pch=0,cex=2,col="blue")
+  points(beta,r[(m-1)*5+3,],pch=0,cex=2,col="blue")
   points(beta,r[(m-1)*5+4,],pch=17,cex=2,col="green")
   ylab <- ""
 }
 
 legend(x="topright",
-       legend=c("iid RMSE","Integrated","Point samples","Randomized HMC"),
+       legend=c("iid RMSE","Integrated","Discrete, high freq.","Discrete, low freq.","Randomized HMC"),
        cex=1.7,
-       lwd=c(2,NaN,NaN,NaN),
-       pch=c(NaN,1,4,17),
-       col=c("black","black","red","green"))
+       lwd=c(2,NaN,NaN,NaN,NaN),
+       pch=c(NaN,1,4,0,17),
+       col=c("black","black","red","blue","green"))
 
 
 dev.off()
