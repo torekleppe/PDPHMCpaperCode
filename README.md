@@ -9,5 +9,5 @@ The code has been run using R version 4.0.3 (2020-10-10) -- "Bunny-Wunnies Freak
 and with rstan Version 2.21.2.
 
 
-The development version of pdphmc may be found at [https://github.com/torekleppe/pdphmc](https://github.com/torekleppe/pdphmc)
+The development version of pdphmc (which now runs on windows) may be found at [https://github.com/torekleppe/pdphmc](https://github.com/torekleppe/pdphmc)
 
