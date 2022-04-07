@@ -1,5 +1,6 @@
 # PDPHMCpaperCode
-Code corresponding to the paper "Connecting the Dots: Towards Continuous Time Hamiltonian Monte Carlo" by Tore Selland Kleppe (see arXiv:2005.01285 for details)
+Code corresponding to the paper "Connecting the Dots: Numerical Randomized Hamiltonian Monte Carlo
+with State-Dependent Event Rates" by Tore Selland Kleppe published in Journal of Computational and Graphical Statistics
 
 The code has so far only been run on mac computers, using the clang c++ compiler.
 
